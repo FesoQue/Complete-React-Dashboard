@@ -6,14 +6,13 @@ import {
   ColumnDirective,
   Search,
   Page,
+  Toolbar,
 } from '@syncfusion/ej2-react-grids';
 
 import { employeesData, employeesGrid } from '../asset/dummy';
 import Header from '../component/Header';
 
 const Employees = () => {
-  const toolbarOptions = ['Search'];
-
   const editing = { allowDeleting: true, allowEditing: true };
 
   return (
@@ -24,16 +23,14 @@ const Employees = () => {
         width='auto'
         allowPaging
         allowSorting
-        pageSettings={{ pageCount: 5 }}
-        editSettings={editing}
-        toolbar={toolbarOptions}
+        toolbar={['search']}
       >
         <ColumnsDirective>
           {employeesGrid.map((item, index) => (
             <ColumnDirective key={index} {...item} />
           ))}
         </ColumnsDirective>
-        <Inject services={[Search, Page]} />
+        <Inject services={[Search, Page, Toolbar]} />
       </GridComponent>
     </div>
   );
