@@ -1,8 +1,25 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const setCurrentColor = () => {
+  let color = localStorage.getItem('themeColor');
+  if (color) {
+    return color;
+  } else {
+    return '#0059b2';
+  }
+};
+const setCurrentMode = () => {
+  let mode = localStorage.getItem('themeMode');
+  if (mode) {
+    return mode;
+  } else {
+    return 'light';
+  }
+};
+
 const initialState = {
-  currentMode: 'light',
-  currentColor: '#1A97F5',
+  currentMode: setCurrentMode(),
+  currentColor: setCurrentColor(),
   themeSettings: false,
 };
 
@@ -12,14 +29,12 @@ export const themeSlice = createSlice({
   reducers: {
     handleThemeMode: (state, action) => {
       return { ...state, currentMode: action.payload };
-      // localStorage.setItem('themeMode', action.payload)
     },
     handleColorMode: (state, action) => {
       return { ...state, currentColor: action.payload };
-      state.currentColor = action.payload;
     },
     handleThemeSettings: (state, action) => {
-      return { ...state, themeSettings: action.payload };
+      state.themeSettings = action.payload;
     },
   },
 });

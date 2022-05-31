@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 import { BsCheck } from 'react-icons/bs';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
@@ -10,13 +10,19 @@ import {
 } from '../features/theme-slice';
 import { themeColors } from '../asset/dummy';
 import { itemsToOrder } from '@syncfusion/ej2/treemap';
+import { JsonAdaptor } from '@syncfusion/ej2/data';
 
 const ThemeSettings = () => {
   const dispatch = useDispatch();
 
-  const { currentMode, currentColor, themeSettings } = useSelector(
-    (state) => state.themes
-  );
+  const { currentMode, currentColor } = useSelector((state) => state.themes);
+
+  useEffect(() => {
+    localStorage.setItem('themeColor', currentColor);
+  }, [currentColor]);
+  useEffect(() => {
+    localStorage.setItem('themeMode', currentMode);
+  }, [currentMode]);
 
   return (
     <div className='bg-half-transparent w-screen fixed nav-item top-0 right-0'>
